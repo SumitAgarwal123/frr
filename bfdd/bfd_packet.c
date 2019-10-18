@@ -604,8 +604,9 @@ int bfd_recv_cb(struct thread *t)
 	/* Find the session that this packet belongs. */
 	bfd = ptm_bfd_sess_find(cp, &peer, &local, ifindex, vrfid, is_mhop);
 	if (bfd == NULL) {
-		cp_debug(is_mhop, &peer, &local, ifindex, vrfid,
-			 "no session found");
+		if (BFD_DEBUG())
+			cp_debug(is_mhop, &peer, &local, ifindex, vrfid,
+				"no session found");
 		return 0;
 	}
 
